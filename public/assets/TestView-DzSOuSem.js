@@ -1,0 +1,1 @@
+import{c as a,a as e,b as t,d as o,w as r,u as s,F as c,o as n,R as u}from"./index-BIkwCfSt.js";const i={__name:"TestView",setup(d){return(l,_)=>(n(),a(c,null,[e(" test view 你會看到 head meta data 因為 before each 跟著切換 "),t("div",null,[e(" router功能寫這 "),o(s(u),{to:"/"},{default:r(()=>[e("Go to Home")]),_:1})])],64))}};export{i as default};
