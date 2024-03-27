@@ -1,7 +1,8 @@
 # wass
 
-This template should help get you started developing with Vue 3 in Vite.
+按照需求完成了畫面與使用到的功能
 
+區分主題 與 api 有抽離 stores和 utils
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).

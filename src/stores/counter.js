@@ -10,3 +10,18 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+export const useThemeStore = defineStore('theme', {
+  state: () => ({
+    color: '#77a88d', // 默認顏色
+    theme: 'light' // 默認主題
+  }),
+  actions: {
+    setColor(color) {
+      this.color = color
+    },
+    setTheme(theme) {
+      this.theme = theme
+    }
+  }
+})

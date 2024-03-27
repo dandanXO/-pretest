@@ -1,85 +1,53 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    
   </header>
-
-  <RouterView />
+  <div :style="{background: themeStore.color}">
+    這裡是　router view 之外用來設定 整個主題的地方使用 Pinia <br>
+    當前顏色{{ themeStore.color }} <input v-model="themeStore.color" @change="selectColor" type="color"><br>
+   <div @click="changeTheme"> 當前明暗主題{{themeStore.theme}} 點我可以換主題</div><br>    
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+<script setup>
+import { RouterView } from 'vue-router'
+import { onMounted } from 'vue'
+import { useThemeStore } from '@/stores/counter'
+import axios from 'axios';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const themeStore = useThemeStore()
+onMounted(() => {
+  // 設置頁面標題
+  document.title = 'Dan title'
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  // 更新或添加頁面描述
+  let metaDescription = document.querySelector('meta[name="description"]')
+  if (metaDescription) {
+    metaDescription.setAttribute('content', 'dan content')
+  } else {
+    metaDescription = document.createElement('meta')
+    metaDescription.setAttribute('name', 'dan content')
+    metaDescription.setAttribute('content', 'dan content')
+    document.getElementsByTagName('head')[0].appendChild(metaDescription)
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+})
+const selectColor = (color)=>{
+  themeStore.setColor = color
 }
+function changeTheme() {
+  themeStore.setTheme(themeStore.theme === 'light' ? 'dark' : 'light')
+  if(themeStore.theme === 'light'){
+    document.body.style.backgroundColor = '#fff'
+  }else{
+    document.body.style.backgroundColor = '#000'
+  }
+  
+}
+</script>
+
+<style lang="scss" scope>
+  
 </style>
